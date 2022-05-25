@@ -1,0 +1,13 @@
+codegen:
+  EventBase : './models/EventBase.py'
+  PageViewPayload : './models/PageViewPayload.py'
+  RegisterPayload : './models/RegisterPayload.py'
+
+PageView:
+  task: 'PageView'
+  enums : ~
+
+Register:
+  task: 'Register'
+  enums : 
+    channel: './conf/ChannelEnum.json'

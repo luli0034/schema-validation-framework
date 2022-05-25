@@ -1,0 +1,19 @@
+{
+    "title": "PageViewPayload",
+    "type": "object",
+    "properties": {
+        "doc_id": {
+            "title": "Doc Id",
+            "type": "string",
+            "format": "uuid"
+        },
+        "destination_bq": {
+            "title": "Destination Bq",
+            "type": "string"
+        }
+    },
+    "required": [
+        "doc_id",
+        "destination_bq"
+    ]
+}

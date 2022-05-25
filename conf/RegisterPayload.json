@@ -1,0 +1,24 @@
+{
+    "title": "RegisterPayload",
+    "type": "object",
+    "properties": {
+        "channel": {
+            "$ref": "#/definitions/Enum"
+        },
+        "destination_bq": {
+            "title": "Destination Bq",
+            "type": "string"
+        }
+    },
+    "required": [
+        "channel",
+        "destination_bq"
+    ],
+    "definitions": {
+        "Enum": {
+            "title": "Enum",
+            "description": "Generic enumeration.\n\nDerive from this class to define new enumerations.",
+            "enum": []
+        }
+    }
+}
