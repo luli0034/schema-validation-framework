@@ -17,14 +17,14 @@ def _on_success_callback(configs, event):
         dest = f'{SUCCESS_PATH}{dest}.txt'
     else:
         logger.error(f'Can not find the destination by {dest_str}, please check your job.conf')
-        dest = f'{UNSUCCESS_PATH}dcard_event.event_error_log.txt'
+        dest = f'{UNSUCCESS_PATH}db.event_error_log.txt'
 
     sink(event, dest)
     return 
 
 def _on_fail_callback(event):
     # Write file into fixed directory
-    dest = f'{UNSUCCESS_PATH}dcard_event.event_error_log.txt'
+    dest = f'{UNSUCCESS_PATH}db.event_error_log.txt'
     sink(event, dest)
     return 
 
@@ -50,8 +50,8 @@ def process_event(jobpath, event):
     # 3. Create Data model by event_type
     try:
         validator = EventValidator(configs[event_type], payloads_mapping)
-    except KeyError:
-        logger.error("[Fail] input is invalid json format")
+    except KeyError as e:
+        logger.error(f"[Fail] The key {e} is not exist {configs}")
         _on_fail_callback(event)
         return
 

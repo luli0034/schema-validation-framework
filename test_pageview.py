@@ -7,8 +7,8 @@ from utils import load_event
 
 class TestPagView(unittest.TestCase):
     JOB_PATH='./job.yaml'
-    SUCCESS_PATH='./test/success/dcard_event.pageView.txt'
-    UNSUCCESS_PATH='./test/fail/dcard_event.event_error_log.txt'
+    SUCCESS_PATH='./test/success/db.pageView.txt'
+    UNSUCCESS_PATH='./test/fail/db.event_error_log.txt'
 
     def test_on_success(self):
 

@@ -4,6 +4,6 @@
     "user_id":"79c4f57e-e606-4c01-bee5-509e37f27ca8",
     "event_payload":{
         "doc_id":"02a06dc2-088e-4534-8076-9ce08c50f711",
-        "WRONG_DEST_KEY":"dcard_event.pageView"
+        "WRONG_DEST_KEY":"db.pageView"
     }
 }

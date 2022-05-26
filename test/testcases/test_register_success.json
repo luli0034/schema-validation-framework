@@ -4,6 +4,6 @@
     "user_id":"8966710f-d9e7-4829-bd96-b34281f66f92",
     "event_payload":{
         "channel":"facebook",
-        "destination_bq":"dcard_event.Register"
+        "destination_bq":"db.Register"
     }
 }

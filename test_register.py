@@ -7,8 +7,8 @@ from utils import load_event
 
 class TestRegister(unittest.TestCase):
     JOB_PATH='./job.yaml'
-    SUCCESS_PATH='./test/success/dcard_event.Register.txt'
-    UNSUCCESS_PATH='./test/fail/dcard_event.event_error_log.txt'
+    SUCCESS_PATH='./test/success/db.Register.txt'
+    UNSUCCESS_PATH='./test/fail/db.event_error_log.txt'
 
     def test_on_success(self):
 
