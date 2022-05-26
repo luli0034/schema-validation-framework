@@ -1,0 +1,10 @@
+{
+    "event_type":"PageView",
+    "event_timestamp":1653529936,
+    "user_id":"79c4f57e-e606-4c01-bee5-509e37f27ca8",
+    "event_payload":{
+        "doc_id":"WRONG UUID",
+        "destination_bq":777,
+        "new_type":"WRONG TYPE"
+    }
+}
