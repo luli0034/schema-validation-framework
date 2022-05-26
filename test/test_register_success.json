@@ -1,0 +1,9 @@
+{
+    "event_type":"Register",
+    "event_timestamp":1653530033,
+    "user_id":"8966710f-d9e7-4829-bd96-b34281f66f92",
+    "event_payload":{
+        "channel":"facebook",
+        "destination_bq":"dcard_event.Register"
+    }
+}
