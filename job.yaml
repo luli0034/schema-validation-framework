@@ -5,9 +5,11 @@ codegen:
 
 PageView:
   task: 'PageView'
+  succ_dest: 'event_payload.destination_bq'
   enums : ~
 
 Register:
   task: 'Register'
+  succ_dest: 'event_payload.destination_bq'
   enums : 
-    channel: './conf/ChannelEnum.json'
+    channel: './schema/ChannelEnum.json'

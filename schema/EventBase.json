@@ -8,7 +8,8 @@
         },
         "user_id": {
             "title": "User Id",
-            "type": "string"
+            "type": "string",
+            "format": "uuid4"
         },
         "event_timestamp": {
             "title": "Event Timestamp",
