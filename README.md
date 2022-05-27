@@ -1,7 +1,5 @@
 # Event Validation Framework
 
-
-## Introduction
 ## Project Structure
 
 ```bash
@@ -84,7 +82,7 @@ By maintaining the JSON list, we can know the values in the specific `enum`.
 ]
 ```
 
-### Define your job
+### Job
 
 In order to better achieve Configuration as code, you need to define some information about those types of events your want to verify in main program. (`job.yaml`)
 
@@ -138,6 +136,8 @@ Install `requirements`
 pip install requirements.txt
 ```
 
+-----------
+
 ### 1. Define your Event & Enum
 
 Suppose we have a new event named `LuliPayload` as the following:
@@ -148,26 +148,40 @@ Suppose we have a new event named `LuliPayload` as the following:
     3. `output`: output destination
 - All properties is required
 
-```yaml
+```json
 {
     "title": "LuliPayload",
     "type": "object",
     "properties": {
-        "input": {
+        "user_id": {
             "type": "string",
             "format": "uuid4"
+        },
+        "input": {
+            "$ref": "#/definitions/Enum"
         },
         "output": {
             "type": "string"
         }
     },
     "required": [
-        "input"
-    ]
+        "user_id",
+        "input",
+        "output"
+    ],
+    "definitions": {
+        "Enum": {
+            "title": "Enum",
+            "enum": []
+        }
+    }
 }
 ```
+`./schema/LuliPayload.json`
 
-And we define a `LuliEnum.json`
+-----------
+
+And we define a JSON file for available enums.
 
 ```json
 [
@@ -175,25 +189,33 @@ And we define a `LuliEnum.json`
     "Taoyuan"
 ]
 ```
+`./schema/LuliEnum.json`
+
+-----------
 
 ### 2. Compose your job in yaml
 
-```bash
+```yaml
 codegen:
   LuliPayload : './models/LuliPayload.py'
 
-LuliPayload:
-  task: 'LuliPayload'
+LuliEvent:
+  task: 'LuliEvent'
   succ_dest: 'event_payload.output'
   enums : 
     input: './schema/LuliEnum.json'
 ```
+
+
+-----------
 
 ### 2. Generate the python code
 
 ```bash
 python main.py codegen --jobpath ./luli_job.yaml --schema ./schema/LuliPayload.json
 ```
+
+-----------
 
 After executing the above shell, there is a new python file will appear under the model folder.
 
@@ -216,10 +238,13 @@ class LuliPayload(BaseModel):
     input: Enum
     output: str
 ```
+`./models/LuliPayload.py`
 
-Then, don’t forget to import your model in `utils.py`
+-----------
 
-```bash
+Then, don’t forget to import your model and create mapping in `utils.py`.
+
+```python
 ####################import payloads#############################
 from models.PageViewPayload import PageViewPayload
 from models.RegisterPayload import RegisterPayload
@@ -237,6 +262,20 @@ payloads_mapping = {
 ### 3. Verify your incoming event
 
 There are two ways to verify your event data.
+Our incoming event is like:
+```json
+{
+    "event_type":"LuliEvent",
+    "event_timestamp":1653529936,
+    "user_id":"79c4f57e-e606-4c01-bee5-509e37f27ca8",
+    "event_payload":{
+        "user_id":"02a06dc2-088e-4534-8076-9ce08c50f711",
+        "input":"Taoyuan",
+        "output":"db.output_table"
+    }
+}
+```
+`testluli.json`
 
 1. Verify a file by executing the shell
     
@@ -244,11 +283,7 @@ There are two ways to verify your event data.
     python main.py process --jobpath ./luli_job.yaml --eventpath testluli.json
     2022-05-26 16:56:20,012 - INFO - [Success] LuliEvent is valid with model EventValidator
     ```
-    
-    The successful event will be written in  `./test/success/db.output_table.txt`
-    
-    The unsuccessful event will be written in  `./test/fail/db.event_error_log.txt`
-    
+
 2. Verify a string by calling the function `process_event`.
     
     ```python
@@ -259,6 +294,11 @@ There are two ways to verify your event data.
     process_event(JOB_PATH, event)
     ```
     
+    The successful event will be written in  `./test/success/db.output_table.txt`
+    
+    The unsuccessful event will be written in  `./test/fail/db.event_error_log.txt`
+
+--- 
 
 Pytest report:
 
