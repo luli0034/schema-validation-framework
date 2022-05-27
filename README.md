@@ -205,7 +205,7 @@ LuliEvent:
   enums : 
     input: './schema/LuliEnum.json'
 ```
-
+`./luli_job.yaml`
 
 -----------
 
