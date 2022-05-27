@@ -1,5 +1,21 @@
 # Event Validation Framework
 
+## Introduction
+
+![Untitled](./Architecture.png)
+
+1. **Code Generation**
+    
+    Generate data models (`pydantic`) via the user-defined schemas (JSON format). Generated models are python files.
+    
+2. **EventValidator**
+    
+    `EventValidator` inherits from `EventBuilder`, it dynamically assembles `EventBae` and different payloads into a new data model.
+    
+3. **Process**
+    
+    Create `EventValidator` instance by the type of processing event. If the event is valid, call `on_success_callback()`, else `on_fail_callback()`.
+
 ## Project Structure
 
 ```bash
@@ -107,19 +123,19 @@ Register:
 
 Terminology:
 
-- codegen: `{filename}:{path}{filename}.py`, filenames needs to be equal.
+- **codegen**: `{filename}:{path}{filename}.py`, filenames needs to be equal.
     
     File paths for automatic code generation.
     
-- Event:
-    - task: string, task name.
-    - succ_dest: `{layer1}.{layer2}`
+- **Event**:
+    - **task**: string, task name.
+    - **succ_dest**: `{layer1}.{layer2}`
         
         Output destination, use a period to determine the next layer in the nested dictionary.
         
         For example, `event_payload.destination_bq` means your destination value is locate in `event[event_payload][destination_bq]`.
         
-    - enums: `{enum_key}:{enum_path}`
+    - **enums**: `{enum_key}:{enum_path}`
         
         Bind the key in payloads with the user-defined enum (JSON file).
         
