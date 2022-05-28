@@ -2,7 +2,7 @@ import json
 from pydantic import BaseModel, create_model
 from enum import Enum
 from models.EventBase import EventBase
-class BaseValidator:
+class EventBuilder:
     
     def __init__(self, configs, PayloadModel):
         self._EventBase = EventBase

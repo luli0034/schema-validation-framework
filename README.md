@@ -19,7 +19,7 @@
 │   └── RegisterPayload.json
 │
 └── validator
-    ├── BaseValidator.py
+    ├── EventBuilder.py
     └── EventValidator.py
 ```
 

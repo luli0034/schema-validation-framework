@@ -1,10 +1,10 @@
 from pydantic import ValidationError
 import logging
-from validator.BaseValidator import BaseValidator
+from validator.EventBuilder import EventBuilder
 
 logger = logging.getLogger(__name__)
 
-class EventValidator(BaseValidator):
+class EventValidator(EventBuilder):
     
     def __init__(self, configs, mapping):
         self.task = configs['task']
