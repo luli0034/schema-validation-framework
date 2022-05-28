@@ -4,6 +4,7 @@ import click.testing
 import json
 from main import process_event
 from utils import load_event
+import os
 
 class TestPagView(unittest.TestCase):
     JOB_PATH='./job.yaml'

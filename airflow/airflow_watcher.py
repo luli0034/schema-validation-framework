@@ -17,6 +17,7 @@ class Handler(FileSystemEventHandler):
         if event.event_type == 'created':
             print(f"file {event.src_path} created")
             jobpath='job.yaml'
+            dag_id='codegen'
             schema=event.src_path
             payload = {
                 'conf': {
@@ -24,7 +25,7 @@ class Handler(FileSystemEventHandler):
                     'schema': schema
                 },
             }
-            response = requests.post('http://localhost:8080/api/v1/dags/codegen/dagRuns', headers=headers, json=payload, auth=('airflow', 'airflow'))
+            response = requests.post(f'http://localhost:8080/api/v1/dags/{dag_id}/dagRuns', headers=headers, json=payload, auth=('airflow', 'airflow'))
             print(response)
     
     def on_modified(event):

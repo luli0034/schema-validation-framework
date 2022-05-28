@@ -307,6 +307,7 @@ Our incoming event is like:
 Pytest report:
 
 ```bash
+python -m pytest --cov
 ----------- coverage: platform linux, python 3.7.5-final-0 -----------
 Name                          Stmts   Miss  Cover
 -------------------------------------------------
