@@ -1,5 +1,5 @@
 {
-    "title": "PageViewPayload",
+    "title": "PageView",
     "type": "object",
     "properties": {
         "doc_id": {

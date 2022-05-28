@@ -1,7 +1,7 @@
 codegen:
   EventBase : './models/EventBase.py'
-  PageViewPayload : './models/PageViewPayload.py'
-  RegisterPayload : './models/RegisterPayload.py'
+  PageView : './models/PageView.py'
+  Register : './models/Register.py'
 
 PageView:
   task: 'PageView'

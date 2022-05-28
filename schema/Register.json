@@ -1,5 +1,5 @@
 {
-    "title": "RegisterPayload",
+    "title": "Register",
     "type": "object",
     "properties": {
         "channel": {

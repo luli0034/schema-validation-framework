@@ -1,10 +1,8 @@
 import yaml
 import json
 import logging
-####################import payloads#############################
-from models.PageViewPayload import PageViewPayload
-from models.RegisterPayload import RegisterPayload
-################################################################
+import pkgutil
+import importlib
 
 def get_logger(name):
     logFormatter = '%(asctime)s - %(levelname)s - %(message)s'
@@ -14,11 +12,15 @@ def get_logger(name):
 
 logger = get_logger(__name__)
 
-payloads_mapping = {
-    'PageView': PageViewPayload,
-    'Register': RegisterPayload
-}
-
+# Dynamically import all models and mapping with filename
+payloads_mapping = {}
+for _, name, _ in pkgutil.iter_modules(['./models/']):
+    try:
+        payloads_mapping[name] = getattr(importlib.import_module(f'models.{name}'), name)
+        
+    except Exception as e:
+        logger.error('Can not import {}'.format(name))
+        raise
 
 def load_configs(config):
     with open(config, "r") as f:

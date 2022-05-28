@@ -8,8 +8,7 @@ class EventValidator(EventBuilder):
     
     def __init__(self, configs, mapping):
         self.task = configs['task']
-        self.payloads = mapping
-        super().__init__(configs, self.payloads[self.task])
+        super().__init__(configs, mapping[self.task])
     
     def verify(self, event):
         try:

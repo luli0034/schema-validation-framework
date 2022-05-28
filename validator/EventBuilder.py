@@ -8,12 +8,12 @@ class EventBuilder:
         self._EventBase = EventBase
         if configs['enums']:
             self._enums = self.get_enums(configs['enums'])
-            self._payload_model = self.get_payload('{task}PayLoad'.format(task=configs['task']), PayloadModel, self._enums)
+            self._payload_model = self.merge_enums_with_model('{task}PayLoad'.format(task=configs['task']), PayloadModel, self._enums)
         else:
             self._payload_model = PayloadModel
-        self.model = self.get_model(name=configs['task'], payload=self._payload_model)        
+        self.model = self.merge_model_with_base(name=configs['task'], payload=self._payload_model)        
 
-    def get_model(self, name, payload):
+    def merge_model_with_base(self, name, payload):
         return create_model(
             name,
             __base__=self._EventBase,
@@ -28,7 +28,7 @@ class EventBuilder:
         
         return fields
     
-    def get_payload(self, name, PayloadModel,fields):
+    def merge_enums_with_model(self, name, PayloadModel,fields):
         return create_model(
             name,
             __base__= PayloadModel,

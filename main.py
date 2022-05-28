@@ -2,6 +2,8 @@ import yaml
 import logging
 import click
 import json
+import pkgutil
+import importlib
 from validator.EventValidator import EventValidator
 from utils import get_logger, load_configs, sink, lookup_dest, load_event, payloads_mapping
 SUCCESS_PATH='./test/success/'
@@ -29,7 +31,7 @@ def _on_fail_callback(event):
     return 
 
 def process_event(jobpath, event):
-    # 1. Load job configuration
+    # 1. Load job configuration and import models
     configs = load_configs(jobpath)
 
     # 2-1. Check event is Json format
@@ -51,7 +53,7 @@ def process_event(jobpath, event):
     try:
         validator = EventValidator(configs[event_type], payloads_mapping)
     except KeyError as e:
-        logger.error(f"[Fail] The key {e} is not exist {configs}")
+        logger.error(f"[Fail] The key {e} is not exist in {payloads_mapping}")
         _on_fail_callback(event)
         return
 
