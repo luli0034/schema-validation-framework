@@ -258,23 +258,6 @@ class LuliPayload(BaseModel):
 
 -----------
 
-Then, don’t forget to import your model and create mapping in `utils.py`.
-
-```python
-####################import payloads#############################
-from models.PageViewPayload import PageViewPayload
-from models.RegisterPayload import RegisterPayload
-from models.LuliPayload import LuliPayload
-################################################################
-
-payloads_mapping = {
-    'PageView': PageViewPayload,
-    'Register': RegisterPayload,
-    # Define your new task and model
-    'LuliEvent': LuliPayload
-}
-```
-
 ### 3. Verify your incoming event
 
 There are two ways to verify your event data.
