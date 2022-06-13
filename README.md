@@ -1,4 +1,4 @@
-# Event Validation Framework
+# Schema Validation Framework
 
 ## Introduction
 
